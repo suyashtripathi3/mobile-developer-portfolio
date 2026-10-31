@@ -24,10 +24,20 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
   const [loading, setLoading] = useState(false)
   const [linkedinNotice, setLinkedinNotice] = useState(false)
   const [history, setHistory] = useState([])
+  const [now, setNow] = useState(() => nowParts())
   const timer = useRef(null)
-  const { time, date } = nowParts()
+  const { time, date } = now
+
+  // Live clock, like a real phone — updates every 20 seconds.
+  useEffect(() => {
+    const id = window.setInterval(() => setNow(nowParts()), 20000)
+    return () => window.clearInterval(id)
+  }, [])
+
+  function buzz() { try { navigator.vibrate && navigator.vibrate(8) } catch { /* vibration unsupported */ } }
 
   function openApp(id) {
+    buzz()
     if (id === 'github') { window.open(PROFILE.github, '_blank', 'noopener'); return }
     if (id === 'linkedin') {
       if (!CONFIG.LINKEDIN_URL) { setLinkedinNotice(true); navigate('contact'); return }
@@ -44,13 +54,14 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
   }
 
   function goBack() {
+    buzz()
     setHistory((h) => {
       const prev = h[h.length - 1] || 'home'
       setScreen(prev)
       return h.slice(0, -1)
     })
   }
-  function goHome() { setHistory([]); setScreen('home') }
+  function goHome() { buzz(); setHistory([]); setScreen('home') }
 
   useEffect(() => {
     if (!exploreRequest) return
@@ -90,7 +101,8 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
             <p className="lock-time">{time}</p>
             <p className="lock-hint">Suyash Tripathi</p>
             <p className="lock-sub">React Native Developer</p>
-            <button className="btn unlock" onClick={() => setLocked(false)}>Tap to unlock</button>
+            <button className="btn unlock" onClick={() => { buzz(); setLocked(false) }}>Tap to unlock</button>
+            <p className="lock-swipe">or swipe up on the home bar below</p>
           </div>
         ) : loading ? (
           <div className="screen-body skeleton" aria-label="Loading"><i /><i /><i /><i /></div>
@@ -101,7 +113,7 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
               <span className="widget-mark">ST</span>
             </div>
             <div className="app-grid">
-              {APPS.map((a) => (
+              {APPS.slice(0, 4).map((a) => (
                 <button key={a.id} className="app-btn" onClick={() => openApp(a.id)} aria-label={`Open ${a.label}`}>
                   <span className="app-icon" style={{ background: a.tint }}><AppIcon id={a.icon} /></span>
                   <span className="app-label">{a.label}</span>
@@ -109,6 +121,14 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
               ))}
             </div>
             <p className="home-foot">Tap an app. GitHub opens in a new tab.</p>
+            <div className="dock" aria-label="Dock">
+              {APPS.slice(4).map((a) => (
+                <button key={a.id} className="app-btn dock-btn" onClick={() => openApp(a.id)} aria-label={`Open ${a.label}`}>
+                  <span className="app-icon" style={{ background: a.tint }}><AppIcon id={a.icon} /></span>
+                  <span className="app-label">{a.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
         ) : (
           <div className={`app-screen ${screen === 'detail' ? 'app-screen-detail' : ''}`}>

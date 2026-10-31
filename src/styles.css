@@ -147,6 +147,13 @@ footer{border-top:1px solid #1c2739;padding:30px 5vw;text-align:center}
 }
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
 .reveal.revealed{opacity:1;transform:none}
+.home-screen{display:flex;flex-direction:column}
+.dock{display:flex;justify-content:space-between;gap:8px;margin-top:auto;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:22px;padding:12px 10px;backdrop-filter:blur(10px)}
+.dock-btn{flex:1}.dock .app-icon{width:52px;height:52px;border-radius:15px}
+.phone.android .dock .app-icon{border-radius:20px}
+.dock .app-label{font-size:.62rem}
+.avatar-img{border-radius:50%;object-fit:cover;display:block;margin:0 auto 12px;box-shadow:0 8px 20px rgba(15,23,42,.18);border:3px solid #fff}
+.lock-swipe{font-size:.78rem;color:#cbd5e1;margin-top:14px}
 .app-screen-detail{animation:appSlide .34s cubic-bezier(.22,1,.36,1)}
 .android-nav{position:absolute;bottom:4px;left:0;right:0;z-index:6;display:flex;justify-content:space-around;align-items:center;padding:6px 40px}
 .android-nav button{background:none;border:0;color:rgba(255,255,255,.85);min-height:32px;font-size:1rem}
@@ -163,9 +170,17 @@ footer{border-top:1px solid #1c2739;padding:30px 5vw;text-align:center}
 @media (max-width:1024px){.hero{grid-template-columns:1fr}.hero-copy{max-width:720px}.phones{flex-wrap:wrap}.work-list{grid-template-columns:1fr}}
 @media (max-width:640px){
   .topbar nav a:not(:last-child){display:none}
-  .hero{padding:32px 16px}.phones{gap:22px}
-  .phone{width:min(320px,92vw);height:600px}
+  .hero{padding:20px 12px 28px;gap:24px}
+  .hero-copy .intro{font-size:1rem}
+  .phones{gap:28px}
+  /* On a real phone, the simulated phone IS the experience: fill the screen. */
+  .phone-wrap{width:100%}
+  .phone{width:min(372px,96vw);height:min(700px,86dvh);min-height:560px;border-width:8px}
   .app-grid{gap:10px}.app-icon{width:54px;height:54px}
   .cta-row .btn{flex:1}.explore{padding:16px}
+  .mode-toggle{position:sticky;top:58px;z-index:5}
+}
+@media (min-width:641px) and (max-width:1024px){
+  .phone{width:290px;height:600px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}

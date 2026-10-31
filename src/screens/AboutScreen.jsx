@@ -1,11 +1,12 @@
 import React from 'react'
 import { CONFIG, PROFILE } from '../data/portfolio.js'
+import Avatar from '../components/Avatar.jsx'
 
 export default function AboutScreen() {
   return (
     <div className="screen-body">
       <div className="profile-card">
-        <div className="avatar" aria-label="Photograph placeholder">{PROFILE.initials}</div>
+        <Avatar size={88} />
         <h3>{PROFILE.name}</h3>
         <p className="muted small">{PROFILE.title}</p>
         <p className="avail">{PROFILE.availability}</p>

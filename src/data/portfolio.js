@@ -1,6 +1,6 @@
 // ─── CONFIG — Suyash: fill these in. They are intentionally left blank, never guessed. ───
 export const CONFIG = {
-  LINKEDIN_URL: '', // e.g. 'https://www.linkedin.com/in/your-profile'
+  LINKEDIN_URL: 'https://www.linkedin.com/in/suyashtripathi3/', // supplied by Suyash 2026-10-31
   EMAIL: '',        // e.g. 'you@example.com'
   RESUME_URL: '',   // optional: link to a hosted PDF. Leave blank to use the in-app resume.
 }
@@ -11,6 +11,9 @@ export const PROFILE = {
   intro:
     'I am a passionate React Native Developer focused on building modern, intuitive, and high-performance mobile applications. I enjoy transforming ideas into beautiful digital products through thoughtful UI/UX, clean architecture, and practical engineering.',
   initials: 'ST',
+  // Set to a direct photo URL once confirmed (e.g. from LinkedIn).
+  // Leave blank to use the illustrated avatar in components/Avatar.jsx.
+  photo: '',
   github: 'https://github.com/suyashtripathi3',
   oldPortfolio: 'https://my-portfolio-eight-alpha-54.vercel.app/',
   availability: 'Availability: contact via GitHub',

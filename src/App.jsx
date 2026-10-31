@@ -106,8 +106,8 @@ export default function App() {
 
       <footer>
         <p><b>{PROFILE.name}</b> — {PROFILE.title}</p>
-        <p><a href={PROFILE.github} target="_blank" rel="noreferrer">GitHub</a> · <a href={PROFILE.oldPortfolio} target="_blank" rel="noreferrer">Previous portfolio (for context)</a></p>
-        <p className="small muted">LinkedIn and email are intentionally not shown until added in src/data/portfolio.js — no profile or address has been guessed. Education is likewise shown as “not added yet” in the Resume app.</p>
+        <p><a href={PROFILE.github} target="_blank" rel="noreferrer">GitHub</a> · <a href="https://www.linkedin.com/in/suyashtripathi3/" target="_blank" rel="noreferrer">LinkedIn</a> · <a href={PROFILE.oldPortfolio} target="_blank" rel="noreferrer">Previous portfolio (for context)</a></p>
+        <p className="small muted">Email is not shown until added in src/data/portfolio.js — no address has been guessed. Education is likewise shown as “not added yet” in the Resume app.</p>
       </footer>
     </main>
   )
