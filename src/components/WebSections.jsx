@@ -63,7 +63,7 @@ export default function WebSections() {
       <section className="web-section reveal" id="web-skills">
         <p className="section-label">Skills</p>
         <h2>Technical skills</h2>
-        <p className="muted">Mobile development first. No percentage levels — these are areas of work, not measured scores.</p>
+        <p className="muted">Mobile development first. {SKILLS.reduce((n, g) => n + g.items.length, 0)} skills across {SKILLS.length} areas — no percentage levels, because these are areas of work, not measured scores.</p>
         {SKILLS.map((g) => (
           <div key={g.group} className={g.emphasis ? 'skill-group emphasis' : 'skill-group'}>
             <h4>{g.group}{g.emphasis ? ' ★' : ''}</h4>
