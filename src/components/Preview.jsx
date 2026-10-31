@@ -1,14 +1,16 @@
 import React from 'react'
 
 // CSS-only illustrative previews — explicitly NOT real screenshots.
+// Shapes and type only: no emoji, so previews read like real app UI.
 export default function Preview({ kind }) {
   if (kind === 'weather') {
     return (
       <div className="preview preview-weather" aria-label="Illustrative weather preview">
         <span className="pv-city">Your City</span>
+        <span className="pv-sun" aria-hidden="true" />
         <span className="pv-temp">24°</span>
-        <span className="pv-cond">☀️ Clear skies</span>
-        <div className="pv-row"><span>Mon ☀️ 24°</span><span>Tue 🌤️ 22°</span><span>Wed 🌧️ 19°</span></div>
+        <span className="pv-cond">Clear skies</span>
+        <div className="pv-row"><span>Mon · 24°</span><span>Tue · 22°</span><span>Wed · 19°</span></div>
       </div>
     )
   }
@@ -25,8 +27,8 @@ export default function Preview({ kind }) {
   if (kind === 'shop') {
     return (
       <div className="preview preview-shop" aria-label="Illustrative shop preview">
-        <div className="pv-card"><span>🎧</span><b>Headphones</b><span>★ 4.8</span></div>
-        <div className="pv-card"><span>⌚</span><b>Smartwatch</b><span>★ 4.6</span></div>
+        <div className="pv-card"><span className="pv-thumb pv-thumb-a" /><b>Headphones</b><span>★ 4.8</span></div>
+        <div className="pv-card"><span className="pv-thumb pv-thumb-b" /><b>Smartwatch</b><span>★ 4.6</span></div>
       </div>
     )
   }

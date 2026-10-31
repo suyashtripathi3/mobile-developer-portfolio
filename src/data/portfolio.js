@@ -109,12 +109,12 @@ export const PROJECTS = [
 ]
 
 export const APPS = [
-  { id: 'about', label: 'About Me', icon: '👤', tint: '#3b82f6' },
-  { id: 'projects', label: 'My Projects', icon: '📱', tint: '#06b6d4' },
-  { id: 'experience', label: 'Experience', icon: '💼', tint: '#6366f1' },
-  { id: 'skills', label: 'Technical Skills', icon: '⚙️', tint: '#0ea5e9' },
-  { id: 'resume', label: 'Resume', icon: '📄', tint: '#f59e0b' },
-  { id: 'contact', label: 'Contact Me', icon: '✉️', tint: '#10b981' },
-  { id: 'github', label: 'GitHub', icon: '🐙', tint: '#111827' },
-  { id: 'linkedin', label: 'LinkedIn', icon: 'in', tint: '#0a66c2' },
+  { id: 'about', label: 'About Me', icon: 'about', tint: '#2563eb' },
+  { id: 'projects', label: 'My Projects', icon: 'projects', tint: '#0e7490' },
+  { id: 'experience', label: 'Experience', icon: 'experience', tint: '#4338ca' },
+  { id: 'skills', label: 'Technical Skills', icon: 'skills', tint: '#0369a1' },
+  { id: 'resume', label: 'Resume', icon: 'resume', tint: '#b45309' },
+  { id: 'contact', label: 'Contact Me', icon: 'contact', tint: '#047857' },
+  { id: 'github', label: 'GitHub', icon: 'github', tint: '#111827' },
+  { id: 'linkedin', label: 'LinkedIn', icon: 'linkedin', tint: '#0a66c2' },
 ]

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import Phone from './components/Phone.jsx'
-import { PROFILE } from './data/portfolio.js'
+import { PROFILE, PROJECTS } from './data/portfolio.js'
 
 const EXPLORE = [
   { id: 'about', label: 'About Me' }, { id: 'projects', label: 'My Projects' },
@@ -32,26 +32,25 @@ export default function App() {
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <p className="eyebrow">Mobile Application Developer</p>
+          <p className="eyebrow"><span className="eyebrow-line" /> Mobile Application Developer</p>
           <h1>{PROFILE.name}</h1>
-          <h2>{PROFILE.title}</h2>
+          <p className="hero-role">{PROFILE.title}</p>
           <p className="intro">{PROFILE.intro}</p>
           <div className="hero-badges" aria-label="Focus areas">
             <span>React Native</span><span>iOS</span><span>Android</span><span>Firebase</span><span>REST APIs</span>
           </div>
           <div className="cta-row">
-            <button className="btn" onClick={() => explore('projects')}>View projects</button>
-            <button className="btn secondary" onClick={() => document.getElementById('phones')?.scrollIntoView({ behavior: 'smooth' })}>Open the phones</button>
+            <button className="btn" onClick={() => explore('projects')}>See the work →</button>
+            <button className="btn secondary" onClick={() => document.getElementById('phones')?.scrollIntoView({ behavior: 'smooth' })}>Try the phones</button>
             <a className="btn ghost" href={PROFILE.github} target="_blank" rel="noreferrer">GitHub ↗</a>
           </div>
-          <p className="small muted">Two real, working device experiences — iOS and Android — not screenshots. Every app icon inside the phones does something.</p>
+          <p className="small muted">This portfolio is two phones, not two screenshots. Unlock one, tap an icon, and it opens — on iOS and on Android.</p>
 
           <div className="mode-toggle" role="group" aria-label="Device presentation mode">
             {([['ios', 'iOS'], ['android', 'Android'], ['both', 'Both']]).map(([v, label]) => (
               <button key={v} className={mode === v ? 'active' : ''} aria-pressed={mode === v} onClick={() => setMode(v)}>{label}</button>
             ))}
           </div>
-          <p className="small muted">Toggle switches which device is shown or enlarged. On “Both”, both phones are interactive.</p>
         </div>
 
         <div className="phones" id="phones" ref={phonesRef}>
@@ -64,9 +63,21 @@ export default function App() {
         </div>
       </section>
 
+      <section className="work-strip" aria-label="Selected work">
+        <p className="section-label">Selected work</p>
+        <div className="work-list">
+          {PROJECTS.map((p) => (
+            <button key={p.id} className="work-item" onClick={() => explore('projects')}>
+              <span><b>{p.name}</b><span className="work-tag">{p.tagline}</span></span>
+              <span className="work-status">{p.status}</span>
+            </button>
+          ))}
+        </div>
+      </section>
+
       <section className="explore" id="explore">
-        <h2>Explore without tiny taps</h2>
-        <p>These buttons open the same app inside the featured phone above — useful on small screens and with a keyboard.</p>
+        <h2>Inside the phones</h2>
+        <p>Prefer buttons to tiny taps? These open the same app inside the phone above — handy on small screens and with a keyboard.</p>
         <div className="explore-grid">
           {EXPLORE.map((e) => (
             <button key={e.id} className="explore-btn" onClick={() => explore(e.id)}>{e.label}</button>
