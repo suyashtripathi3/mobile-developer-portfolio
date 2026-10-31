@@ -11,8 +11,8 @@ export const PROFILE = {
   intro:
     'I am a passionate React Native Developer focused on building modern, intuitive, and high-performance mobile applications. I enjoy transforming ideas into beautiful digital products through thoughtful UI/UX, clean architecture, and practical engineering.',
   initials: 'ST',
-  // Set to a direct photo URL once confirmed (e.g. from LinkedIn).
-  // Leave blank to use the illustrated avatar in components/Avatar.jsx.
+  // Leave blank to use the supplied photo in src/data/avatar.js.
+  // Set to a direct photo URL only to override it with another confirmed photo.
   photo: '',
   github: 'https://github.com/suyashtripathi3',
   oldPortfolio: 'https://my-portfolio-eight-alpha-54.vercel.app/',
