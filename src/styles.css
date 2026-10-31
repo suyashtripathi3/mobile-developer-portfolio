@@ -306,4 +306,47 @@ footer{border-top:1px solid #1c2739;padding:30px 5vw;text-align:center}
 @media (min-width:641px) and (max-width:1024px){
   .phone{width:290px;height:600px}
 }
+/* ── Rich web hero + phone stage (experience rule) ── */
+.web-hero{max-width:1100px;margin:0 auto;padding:56px 5vw 8px}
+.web-hero-card{position:relative;overflow:hidden;background:radial-gradient(600px 300px at 85% 0%,rgba(59,130,246,.28),transparent 65%),linear-gradient(180deg,#101b30,#0a0f1c);border:1px solid #22314a;border-radius:26px;padding:44px 40px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.4);animation:heroCardIn .7s cubic-bezier(.22,1,.36,1) both}
+.web-hero-card .eyebrow{justify-content:center}
+.web-hero-card .intro{margin:0 auto;max-width:640px}
+.web-hero-card .hero-badges{justify-content:center}
+.web-hero-card .cta-row{justify-content:center}
+.web-counts{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-top:28px;padding-top:22px;border-top:1px solid #22314a;color:#94a3b8;font-size:.9rem}
+.web-counts b{display:block;color:#fff;font-size:1.4rem;line-height:1.2}
+.phone-stage{max-width:900px;margin:0 auto;padding:40px 5vw 56px;text-align:center}
+.phone-stage .eyebrow{justify-content:center}
+.phone-stage h1{font-size:clamp(2rem,5vw,3rem)}
+.phones-single{justify-content:center;margin-top:28px}
+/* ── Rich inside-phone screens: staggered entrance + lift on touch ── */
+@keyframes screenIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes heroCardIn{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes modalIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+.app-screen .screen-body>*{animation:screenIn .45s cubic-bezier(.22,1,.36,1) both}
+.app-screen .screen-body>*:nth-child(2){animation-delay:.05s}
+.app-screen .screen-body>*:nth-child(3){animation-delay:.1s}
+.app-screen .screen-body>*:nth-child(4){animation-delay:.15s}
+.app-screen .screen-body>*:nth-child(5){animation-delay:.2s}
+.app-screen .screen-body>*:nth-child(6){animation-delay:.25s}
+.profile-card{position:relative;overflow:hidden;background:linear-gradient(180deg,#ffffff,#f1f5f9)}
+.profile-card::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#1d4ed8,#38bdf8,#2dd4bf)}
+.profile-card .avatar-img{border-color:#dbeafe;box-shadow:0 10px 24px rgba(29,78,216,.25)}
+.project-row,.row-link{transition:transform .18s cubic-bezier(.22,1,.36,1),box-shadow .18s,border-color .18s}
+.project-row:active,.row-link:active{transform:scale(.98)}
+.chip{transition:transform .15s,background .15s}
+.chip:hover{transform:translateY(-1px)}
+.web-project-card{box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.web-project-card:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(0,0,0,.4)}
+.web-project-card .preview{transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.web-project-card:hover .preview{transform:scale(1.02)}
+.modal-card{animation:modalIn .3s cubic-bezier(.22,1,.36,1) both}
+.modal-backdrop{animation:screenIn .25s ease both}
+.web-section.reveal{transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+@media (max-width:640px){
+  .web-hero{padding:28px 4vw 8px}
+  .web-hero-card{padding:28px 20px;border-radius:20px}
+  .web-counts{gap:18px}
+  .phone-stage{padding:28px 4vw 40px}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}

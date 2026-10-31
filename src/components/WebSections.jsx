@@ -12,7 +12,7 @@ export default function WebSections() {
 
   return (
     <div className="web-sections">
-      <section className="web-section" id="web-about">
+      <section className="web-section reveal" id="web-about">
         <p className="section-label">About</p>
         <h2>About me</h2>
         <div className="web-about-grid">
@@ -29,7 +29,7 @@ export default function WebSections() {
         </div>
       </section>
 
-      <section className="web-section" id="web-projects">
+      <section className="web-section reveal" id="web-projects">
         <p className="section-label">Projects</p>
         <h2>Selected work</h2>
         <div className="web-project-grid">
@@ -44,7 +44,7 @@ export default function WebSections() {
         </div>
       </section>
 
-      <section className="web-section" id="web-experience">
+      <section className="web-section reveal" id="web-experience">
         <p className="section-label">Experience</p>
         <h2>Experience</h2>
         <ol className="timeline web-timeline">
@@ -57,7 +57,7 @@ export default function WebSections() {
         </ol>
       </section>
 
-      <section className="web-section" id="web-skills">
+      <section className="web-section reveal" id="web-skills">
         <p className="section-label">Skills</p>
         <h2>Technical skills</h2>
         <p className="muted">Mobile development first. No percentage levels — these are areas of work, not measured scores.</p>
@@ -69,7 +69,7 @@ export default function WebSections() {
         ))}
       </section>
 
-      <section className="web-section" id="web-resume">
+      <section className="web-section reveal" id="web-resume">
         <p className="section-label">Resume</p>
         <h2>Resume</h2>
         <div className="web-card">
@@ -82,7 +82,7 @@ export default function WebSections() {
         </div>
       </section>
 
-      <section className="web-section" id="web-contact">
+      <section className="web-section reveal" id="web-contact">
         <p className="section-label">Contact</p>
         <h2>Contact</h2>
         <div className="web-card web-contact-card"><ContactScreen /></div>
