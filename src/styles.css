@@ -70,7 +70,9 @@ a{color:#93c5fd}
 .widget{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:20px;color:#fff;padding:15px 16px;display:flex;justify-content:space-between;align-items:center;text-align:left;backdrop-filter:blur(10px)}
 .widget div{display:flex;flex-direction:column}.widget small{color:#dbeafe;text-transform:uppercase;letter-spacing:.08em;font-size:.68rem}
 .widget-sub{font-size:.76rem;color:#cbd5e1;margin-top:2px}
-.widget-mark{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.18);font-weight:700;flex-shrink:0}
+.widget-mark{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;overflow:hidden;flex-shrink:0}
+.widget-mark .avatar-img{border:0;box-shadow:none;width:44px;height:44px;margin:0}
+.widget-mark .hi-bubble{display:none}
 .app-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:24px}
 .app-btn{background:none;border:0;padding:0;color:#fff;min-height:0;animation:appIn .5s cubic-bezier(.22,1,.36,1) both}
 .app-btn:nth-child(2){animation-delay:.04s}.app-btn:nth-child(3){animation-delay:.08s}.app-btn:nth-child(4){animation-delay:.12s}.app-btn:nth-child(5){animation-delay:.16s}.app-btn:nth-child(6){animation-delay:.2s}.app-btn:nth-child(7){animation-delay:.24s}.app-btn:nth-child(8){animation-delay:.28s}
@@ -189,7 +191,7 @@ footer{border-top:1px solid #1c2739;padding:30px 5vw;text-align:center}
 .choose-card:hover{border-color:#38bdf8;box-shadow:0 18px 40px rgba(0,0,0,.4)}
 .choose-icon{font-size:2rem}
 .choose-cta{margin-top:auto;color:#7dd3fc;font-weight:700}
-.experience-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 5vw;border-bottom:1px solid #1c2739;background:#0a0f1c;position:sticky;top:66px;z-index:9}
+.experience-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 5vw;border-bottom:1px solid #1c2739;background:#0a0f1c}
 .experience-bar button{background:transparent;color:#94a3b8;border:1px solid #22314a;border-radius:999px;padding:7px 14px;min-height:36px}
 .experience-bar button.active{background:#e2e8f0;color:#0b1220;border-color:#e2e8f0;font-weight:700}
 .experience-bar .exp-change{margin-left:auto;color:#7dd3fc;border-color:transparent}
@@ -259,18 +261,47 @@ footer{border-top:1px solid #1c2739;padding:30px 5vw;text-align:center}
 @keyframes appIn{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes appOpen{from{opacity:0;transform:scale(.96) translateY(10px)}to{opacity:1;transform:scale(1)}}
 @keyframes shimmer{from{opacity:.5}to{opacity:1}}
-@media (max-width:1024px){.hero{grid-template-columns:1fr}.hero-copy{max-width:720px}.phones{flex-wrap:wrap}.work-list{grid-template-columns:1fr}}
+@media (max-width:1024px){.hero{grid-template-columns:1fr}.hero-copy{max-width:720px}.phones{flex-wrap:wrap}.work-list{grid-template-columns:1fr}.choose-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){
+  .topbar{padding:12px 4vw}
   .topbar nav a:not(:last-child){display:none}
-  .hero{padding:20px 12px 28px;gap:24px}
+  .brand{font-size:.92rem}
+  .hero{padding:20px 4vw 28px;gap:24px}
+  .hero-copy{min-width:0}
   .hero-copy .intro{font-size:1rem}
   .phones{gap:28px}
   /* On a real phone, the simulated phone IS the experience: fill the screen. */
   .phone-wrap{width:100%}
   .phone{width:min(372px,96vw);height:min(700px,86dvh);min-height:560px;border-width:8px}
   .app-grid{gap:10px}.app-icon{width:54px;height:54px}
-  .cta-row .btn{flex:1}.explore{padding:16px}
-  .mode-toggle{position:sticky;top:58px;z-index:5}
+  .cta-row .btn{flex:1}.explore{padding:16px 4vw 40px}
+  .mode-toggle{position:static;width:100%;justify-content:center}
+  .experience-bar{position:static;padding:12px 4vw}
+  .experience-bar .exp-change{margin-left:0}
+  .choose{padding:36px 4vw 40px}
+  .choose-grid{grid-template-columns:1fr}
+  .choose-card{min-height:0;padding:20px}
+  .intro-screen{padding:16px;overflow-y:auto}
+  .intro-phone{width:150px;height:290px;border-width:6px;border-radius:32px}
+  .intro-name{margin-top:20px}
+  .intro-tag{margin-bottom:14px}
+  .web-sections{padding:8px 4vw 20px}
+  .web-card{padding:16px}
+  .web-project-top{flex-wrap:wrap}
+  .work-strip{padding:28px 4vw 8px}
+  .work-item{flex-wrap:wrap}
+  .modal-backdrop{padding:12px}
+  .modal-card{padding:18px}
+  .contact-form input,.contact-form textarea{font-size:16px}
+}
+@media (max-width:380px){
+  .app-grid{gap:8px}.app-icon{width:48px;height:48px}
+  .dock .app-icon{width:46px;height:46px}
+  .dock{padding:10px 8px}
+  .lock-time{font-size:3.6rem}
+  .hero-badges span{padding:5px 10px;font-size:.78rem}
+  .cta-row .btn{padding:11px 12px;font-size:.9rem}
+  .phone{height:min(660px,84dvh);min-height:520px}
 }
 @media (min-width:641px) and (max-width:1024px){
   .phone{width:290px;height:600px}

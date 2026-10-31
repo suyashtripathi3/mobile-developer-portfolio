@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { APPS, PROFILE, PROJECTS } from '../data/portfolio.js'
 import AppIcon from './icons.jsx'
+import Avatar from './Avatar.jsx'
 import AboutScreen from '../screens/AboutScreen.jsx'
 import { ProjectsList, ProjectDetail } from '../screens/ProjectsScreen.jsx'
 import ExperienceScreen from '../screens/ExperienceScreen.jsx'
@@ -181,7 +182,7 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
           <div className="home-screen">
             <div className="widget" onClick={() => openApp('about')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && openApp('about')}>
               <div><small>{date}</small><b>Hello, I build mobile apps.</b><span className="widget-sub">React Native · iOS · Android</span></div>
-              <span className="widget-mark">ST</span>
+              <span className="widget-mark"><Avatar size={44} animated={false} /></span>
             </div>
             <div className="app-grid">
               {APPS.slice(0, 4).map((a) => (
