@@ -8,9 +8,10 @@ export default function ExperienceScreen() {
       <ol className="timeline">
         {EXPERIENCE.map((e) => (
           <li key={e.company} className={e.current ? 'current' : ''}>
+            <span className="timeline-mark">{e.company.split(' ').map((w) => w[0]).slice(0, 2).join('')}</span>
             <b>{e.role}</b>
             <span>{e.company}</span>
-            <span className="period">{e.period}</span>
+            <span className="period">{e.period}{e.current ? ' · Present' : ''}</span>
             <p className="small">{e.description}</p>
           </li>
         ))}

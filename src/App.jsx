@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Phone from './components/Phone.jsx'
 import { PROFILE, PROJECTS } from './data/portfolio.js'
 
@@ -15,10 +15,28 @@ export default function App() {
   const [exploreRequest, setExploreRequest] = useState(null)
   const phonesRef = useRef(null)
 
-  function explore(app) {
-    setExploreRequest({ app, at: Date.now() })
+  function explore(app, projectId) {
+    setExploreRequest({ app, projectId, at: Date.now() })
     phonesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
+
+  // Subtle desktop parallax on the phones + gentle reveal on scroll.
+  // Skipped entirely for touch and reduced-motion users.
+  function onHeroMouse(e) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const r = e.currentTarget.getBoundingClientRect()
+    const x = (e.clientX - r.left) / r.width - 0.5
+    const y = (e.clientY - r.top) / r.height - 0.5
+    e.currentTarget.style.setProperty('--px', x.toFixed(3))
+    e.currentTarget.style.setProperty('--py', y.toFixed(3))
+  }
+  useEffect(() => {
+    const els = document.querySelectorAll('.reveal')
+    if (!('IntersectionObserver' in window)) { els.forEach((el) => el.classList.add('revealed')); return }
+    const io = new IntersectionObserver((entries) => entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('revealed'); io.unobserve(en.target) } }), { threshold: 0.15 })
+    els.forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [])
 
   return (
     <main>
@@ -30,7 +48,7 @@ export default function App() {
         </nav>
       </header>
 
-      <section className="hero" id="top">
+      <section className="hero" id="top" onMouseMove={onHeroMouse}>
         <div className="hero-copy">
           <p className="eyebrow"><span className="eyebrow-line" /> Mobile Application Developer</p>
           <h1>{PROFILE.name}</h1>
@@ -63,19 +81,20 @@ export default function App() {
         </div>
       </section>
 
-      <section className="work-strip" aria-label="Selected work">
+      <section className="work-strip reveal" aria-label="Selected work">
         <p className="section-label">Selected work</p>
         <div className="work-list">
           {PROJECTS.map((p) => (
-            <button key={p.id} className="work-item" onClick={() => explore('projects')}>
+            <button key={p.id} className="work-item" onClick={() => explore('project-detail', p.id)}>
+              <span className="work-dot" style={{ background: p.color }} />
               <span><b>{p.name}</b><span className="work-tag">{p.tagline}</span></span>
-              <span className="work-status">{p.status}</span>
+              <span className="work-status">{p.status} →</span>
             </button>
           ))}
         </div>
       </section>
 
-      <section className="explore" id="explore">
+      <section className="explore reveal" id="explore">
         <h2>Inside the phones</h2>
         <p>Prefer buttons to tiny taps? These open the same app inside the phone above — handy on small screens and with a keyboard.</p>
         <div className="explore-grid">

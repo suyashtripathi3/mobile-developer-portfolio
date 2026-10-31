@@ -56,6 +56,7 @@ export const EXPERIENCE = [
 export const PROJECTS = [
   {
     id: 'skysnap',
+    color: '#0284c7',
     name: 'SkySnap',
     tagline: 'Weather Application',
     status: 'Project',
@@ -69,6 +70,7 @@ export const PROJECTS = [
   },
   {
     id: 'tiwil',
+    color: '#4f46e5',
     name: 'TIWIL',
     tagline: 'Mobile Application',
     status: 'Project',
@@ -82,6 +84,7 @@ export const PROJECTS = [
   },
   {
     id: 'hisabrakho',
+    color: '#047857',
     name: 'HisabRakho',
     tagline: 'Expense Management Application',
     status: 'Under development',
@@ -95,6 +98,7 @@ export const PROJECTS = [
   },
   {
     id: 'rn-e-com',
+    color: '#b45309',
     name: 'RN-E-COM',
     tagline: 'Mini E-commerce App',
     status: 'Completed',

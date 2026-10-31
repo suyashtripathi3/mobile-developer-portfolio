@@ -55,7 +55,10 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
   useEffect(() => {
     if (!exploreRequest) return
     setLocked(false)
-    if (exploreRequest.app === 'github') { window.open(PROFILE.github, '_blank', 'noopener') }
+    if (exploreRequest.app === 'project-detail' && exploreRequest.projectId) {
+      setProjectId(exploreRequest.projectId); setHistory([]); setScreen('detail')
+    }
+    else if (exploreRequest.app === 'github') { window.open(PROFILE.github, '_blank', 'noopener') }
     else if (exploreRequest.app === 'linkedin') {
       if (!CONFIG.LINKEDIN_URL) { setLinkedinNotice(true); setHistory([]); setScreen('contact') }
       else { window.open(CONFIG.LINKEDIN_URL, '_blank', 'noopener') }
@@ -108,7 +111,7 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
             <p className="home-foot">Tap an app. GitHub opens in a new tab.</p>
           </div>
         ) : (
-          <div className="app-screen">
+          <div className={`app-screen ${screen === 'detail' ? 'app-screen-detail' : ''}`}>
             <div className="app-header">
               <button className="nav-btn" onClick={goBack} aria-label="Go back">‹ Back</button>
               <b>{titles[screen]}</b>
@@ -126,7 +129,15 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
           </div>
         )}
 
-        <button className="gesture-bar" onClick={goHome} aria-label="Home gesture bar" />
+        {kind === 'android' && !locked ? (
+          <div className="android-nav" aria-label="Android navigation">
+            <button onClick={goBack} aria-label="Android back">◁</button>
+            <button className="android-home" onClick={goHome} aria-label="Android home">○</button>
+            <button onClick={goHome} aria-label="Android overview">▢</button>
+          </div>
+        ) : (
+          <button className="gesture-bar" onClick={goHome} aria-label="Home gesture bar" />
+        )}
       </div>
       <p className="phone-caption">{kind === 'ios' ? 'iPhone — iOS experience' : 'Pixel — Android experience'}</p>
     </div>

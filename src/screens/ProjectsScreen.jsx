@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { PROJECTS } from '../data/portfolio.js'
 import Preview from '../components/Preview.jsx'
 
 export function ProjectsList({ onOpen }) {
+  const [query, setQuery] = useState('')
+  const q = query.trim().toLowerCase()
+  const shown = PROJECTS.filter((p) => !q || p.name.toLowerCase().includes(q) || p.tagline.toLowerCase().includes(q) || p.stack.some((s) => s.toLowerCase().includes(q)))
   return (
     <div className="screen-body">
+      <label className="search-label" htmlFor="project-search">Search projects</label>
+      <input id="project-search" className="search-input" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Try “weather” or “Firebase”…" />
       <p className="muted small">Tap a project for details. Previews below are illustrative, not real screenshots.</p>
-      {PROJECTS.map((p) => (
+      {shown.length === 0 && <p className="notice">No project matches “{query}”.</p>}
+      {shown.map((p) => (
         <button key={p.id} className="project-row" onClick={() => onOpen(p.id)} aria-label={`Open ${p.name} details`}>
-          <span className="app-icon-sm">{p.name[0]}</span>
+          <span className="app-icon-sm" style={{ background: p.color || '#0f172a' }}>{p.name[0]}</span>
           <span className="pr-main"><b>{p.name}</b><span>{p.tagline}</span></span>
           <span className={`status ${p.status === 'Completed' ? 'ok' : p.status === 'Under development' ? 'warn' : ''}`}>{p.status}</span>
         </button>
