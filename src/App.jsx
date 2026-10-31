@@ -63,7 +63,7 @@ export default function App() {
             <button className="btn secondary" onClick={() => document.getElementById('phones')?.scrollIntoView({ behavior: 'smooth' })}>Try the phones</button>
             <a className="btn ghost" href={PROFILE.github} target="_blank" rel="noreferrer">GitHub ↗</a>
           </div>
-          <p className="small muted">This portfolio is two phones, not two screenshots. Unlock one, tap an icon, and it opens — on iOS and on Android.</p>
+          <p className="small muted">This portfolio is two phones, not two screenshots. Unlock one, tap an icon, and it opens — on iOS and on Android. Try it like a phone: swipe up to unlock, tap the status bar for notifications, open Control Centre from the shade, and use Recent apps to switch.</p>
 
           <div className="mode-toggle" role="group" aria-label="Device presentation mode">
             {([['ios', 'iOS'], ['android', 'Android'], ['both', 'Both']]).map(([v, label]) => (
