@@ -3,10 +3,29 @@
 Vite + React + JavaScript/JSX only. No TypeScript, no extra runtime dependencies.
 
 ## Concept
-Two interactive phones in the browser — an iPhone (iOS) and a Pixel (Android).
-Each phone has a lock screen, a home screen with 8 working apps (About, Projects,
-Experience, Skills, Resume, Contact, GitHub, LinkedIn), in-phone screens, back/home
+A cinematic intro (lightweight canvas particles + CSS-3D floating phone, no heavy
+WebGL dependency, so it never blocks on low-end devices) leads to
+"Choose Your Experience": Web, iOS or Android. All three use the same shared
+data in `src/data/portfolio.js` — Web shows full-page sections, iOS/Android
+show a single realistic phone. Each phone has a lock screen, a home screen
+with 8 working apps (About, Projects, Experience, Skills, Resume, Contact,
+GitHub, LinkedIn), swipe gestures, a notifications shade, a control centre
+(Wi-Fi/Bluetooth/DND/flashlight/brightness), an app switcher, back/home
 navigation, and a brief loading state on app open.
+
+## Email / backend setup (honest)
+The contact form never fakes a sent message.
+- On static GitHub Pages, there is no server: the form tries `POST /api/contact`
+  and, if that is not configured, falls back to opening the visitor's email
+  composer (only if `CONFIG.EMAIL` is set in `src/data/portfolio.js`) or shows
+  a plain "not configured" error.
+- To enable real delivery on Vercel: set `CONFIG.EMAIL` to Suyash's email,
+  deploy the repo to Vercel (so `api/contact.js` runs as a serverless function),
+  and set env vars `CONTACT_TO` and `RESEND_API_KEY` in Vercel. No API key is
+  committed anywhere. Until those are set, the form will say so — it will not
+  claim a message was sent.
+- Resume PDF is generated in the browser from the same displayed data
+  (via jspdf) — no invented education or employment.
 
 ## Run
 ```bash

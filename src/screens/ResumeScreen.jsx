@@ -26,6 +26,36 @@ export function viewResume() {
   window.setTimeout(() => URL.revokeObjectURL(url), 10000)
 }
 
+export async function downloadResumePdf() {
+  // Dynamic import: jspdf only loads when the user actually downloads the PDF,
+  // so the main portfolio bundle stays light.
+  const { jsPDF } = await import('jspdf')
+  const doc = new jsPDF({ unit: 'pt', format: 'a4' })
+  let y = 56
+  const maxW = 500
+  function line(text, size = 11, bold = false, gap = 6) {
+    doc.setFont('helvetica', bold ? 'bold' : 'normal')
+    doc.setFontSize(size)
+    const lines = doc.splitTextToSize(text, maxW)
+    lines.forEach((l) => { if (y > 780) { doc.addPage(); y = 56 } doc.text(l, 48, y); y += size + 4 })
+    y += gap
+  }
+  line(PROFILE.name, 22, true, 2)
+  line(PROFILE.title, 12, false, 14)
+  line('PROFESSIONAL SUMMARY', 12, true, 2); line(PROFILE.intro)
+  line('TECHNICAL SKILLS', 12, true, 2)
+  SKILLS.forEach((g) => line(`${g.group}: ${g.items.join(', ')}`))
+  line('EXPERIENCE', 12, true, 2)
+  EXPERIENCE.forEach((e) => line(`${e.role} — ${e.company} (${e.period}) — ${e.description}`))
+  line('PROJECTS', 12, true, 2)
+  PROJECTS.forEach((p) => line(`${p.name} (${p.status}): ${p.description} Stack: ${p.stack.join(', ')}${p.repo ? ` Repo: ${p.repo}` : ''}`))
+  line('EDUCATION', 12, true, 2); line('Not added yet')
+  line(`GitHub: ${PROFILE.github}`)
+  line(CONFIG.LINKEDIN_URL ? `LinkedIn: ${CONFIG.LINKEDIN_URL}` : 'LinkedIn: Not added yet')
+  line(CONFIG.EMAIL ? `Email: ${CONFIG.EMAIL}` : 'Email: Not added yet')
+  doc.save('Suyash-Tripathi-Resume.pdf')
+}
+
 export function downloadResume() {
   const blob = new Blob([resumeText()], { type: 'text/plain;charset=utf-8' })
   const url = URL.createObjectURL(blob)
@@ -40,7 +70,8 @@ export default function ResumeScreen() {
       <h3>{PROFILE.name}</h3>
       <p className="muted small">{PROFILE.title}</p>
       <div className="link-row">
-        <button className="btn" onClick={downloadResume}>Download resume (.txt)</button>
+        <button className="btn" onClick={downloadResumePdf}>Download resume (PDF)</button>
+        <button className="btn secondary" onClick={downloadResume}>Download resume (.txt)</button>
         <button className="btn secondary" onClick={viewResume}>View resume</button>
         {CONFIG.RESUME_URL && <a className="btn secondary" href={CONFIG.RESUME_URL} target="_blank" rel="noreferrer">View hosted resume ↗</a>}
       </div>
