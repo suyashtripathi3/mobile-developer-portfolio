@@ -153,6 +153,16 @@ footer{border-top:1px solid #1c2739;padding:30px 5vw;text-align:center}
 .phone.android .dock .app-icon{border-radius:20px}
 .dock .app-label{font-size:.62rem}
 .avatar-img{border-radius:50%;object-fit:cover;display:block;margin:0 auto 12px;box-shadow:0 8px 20px rgba(15,23,42,.18);border:3px solid #fff}
+.avatar-wrap{position:relative;display:inline-block}
+.profile-card .avatar-wrap{margin-bottom:12px}
+.avatar-wrap .avatar-img{margin:0}
+.brand-avatar{display:grid;place-items:center;width:38px;height:38px;border-radius:50%}
+.brand-avatar .avatar-img{border:0;box-shadow:none;width:38px;height:38px}
+.brand-avatar .hi-bubble{top:-10px;right:-22px;font-size:.6rem;padding:1px 7px}
+.hi-bubble{position:absolute;top:-12px;right:-20px;background:#fff;color:#0f172a;border-radius:999px;padding:3px 9px;font-size:.7rem;font-weight:800;box-shadow:0 4px 12px rgba(0,0,0,.25);animation:hiPop 5s ease-in-out infinite;pointer-events:none}
+.wave-hand{transform-box:fill-box;transform-origin:20% 90%;animation:wave 5s ease-in-out infinite}
+@keyframes wave{0%,55%,100%{transform:rotate(0deg)}6%{transform:rotate(-24deg)}14%{transform:rotate(18deg)}22%{transform:rotate(-18deg)}30%{transform:rotate(14deg)}38%{transform:rotate(-6deg)}46%{transform:rotate(0deg)}}
+@keyframes hiPop{0%,58%,100%{opacity:0;transform:scale(.7) translateY(4px)}7%{opacity:1;transform:scale(1) translateY(0)}45%{opacity:1;transform:scale(1) translateY(0)}55%{opacity:0;transform:scale(.7) translateY(4px)}}
 .lock-swipe{font-size:.78rem;color:#cbd5e1;margin-top:14px}
 .app-screen-detail{animation:appSlide .34s cubic-bezier(.22,1,.36,1)}
 .android-nav{position:absolute;bottom:4px;left:0;right:0;z-index:6;display:flex;justify-content:space-around;align-items:center;padding:6px 40px}

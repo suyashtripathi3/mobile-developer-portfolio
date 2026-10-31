@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Phone from './components/Phone.jsx'
+import Avatar from './components/Avatar.jsx'
 import { PROFILE, PROJECTS } from './data/portfolio.js'
 
 const EXPLORE = [
@@ -41,7 +42,7 @@ export default function App() {
   return (
     <main>
       <header className="topbar">
-        <a className="brand" href="#top"><span className="brand-mark">ST</span> Suyash Tripathi</a>
+        <a className="brand" href="#top"><span className="brand-avatar"><Avatar size={38} /></span> Suyash Tripathi</a>
         <nav aria-label="Primary">
           <a href="#phones">Phones</a><a href="#explore">Explore</a>
           <a href={PROFILE.github} target="_blank" rel="noreferrer">GitHub ↗</a>
