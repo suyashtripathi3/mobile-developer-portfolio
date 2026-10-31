@@ -33,12 +33,15 @@ export default function WebSections() {
         <p className="section-label">Projects</p>
         <h2>Selected work</h2>
         <div className="web-project-grid">
-          {PROJECTS.map((p) => (
+          {PROJECTS.map((p, i) => (
             <button key={p.id} className="web-project-card" onClick={() => setSelected(p)}>
+              <span className="web-project-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
               <Preview kind={p.preview} />
               <span className="web-project-top"><b>{p.name}</b><span className={`status ${p.status === 'Completed' ? 'ok' : p.status === 'Under development' ? 'warn' : ''}`}>{p.status}</span></span>
               <span className="web-project-tag">{p.tagline}</span>
               <span className="small muted">{p.description}</span>
+              <span className="chips web-project-stack">{p.stack.slice(0, 3).map((s) => <span className="chip" key={s}>{s}</span>)}{p.stack.length > 3 && <span className="chip">+{p.stack.length - 3} more</span>}</span>
+              <span className="web-project-cta">View details →</span>
             </button>
           ))}
         </div>

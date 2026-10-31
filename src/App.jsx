@@ -104,20 +104,27 @@ export default function App() {
         <ExperienceBar experience={experience} setExperience={setExperience} />
 
         <section className="web-hero" id="top">
-          <div className="web-hero-card">
-            <Avatar size={96} />
-            <p className="eyebrow"><span className="eyebrow-line" /> Mobile Application Developer</p>
-            <h1>{PROFILE.name}</h1>
-            <p className="hero-role">{PROFILE.title}</p>
-            <p className="intro">{PROFILE.intro}</p>
-            <p className="intro-tagline">Building Mobile Experiences. Designing Beyond Screens.</p>
-            <div className="hero-badges" aria-label="Focus areas">
-              <span>React Native</span><span>iOS</span><span>Android</span><span>Firebase</span><span>REST APIs</span>
+          <div className="web-hero-card web-hero-split">
+            <div className="web-hero-copy">
+              <p className="eyebrow"><span className="eyebrow-line" /> Mobile Application Developer</p>
+              <h1>{PROFILE.name}</h1>
+              <p className="hero-role">{PROFILE.title}</p>
+              <p className="intro">{PROFILE.intro}</p>
+              <p className="intro-tagline">Building Mobile Experiences. Designing Beyond Screens.</p>
+              <div className="hero-badges" aria-label="Focus areas">
+                <span>React Native</span><span>iOS</span><span>Android</span><span>Firebase</span><span>REST APIs</span>
+              </div>
+              <div className="cta-row">
+                <a className="btn" href="#web-projects">Explore projects →</a>
+                <button className="btn secondary" onClick={downloadResumePdf}>Download resume (PDF)</button>
+                <a className="btn ghost" href={PROFILE.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+              </div>
             </div>
-            <div className="cta-row">
-              <a className="btn" href="#web-projects">Explore projects →</a>
-              <button className="btn secondary" onClick={downloadResumePdf}>Download resume (PDF)</button>
-              <a className="btn ghost" href={PROFILE.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+            <div className="web-hero-photo" aria-hidden="true">
+              <div className="web-hero-photo-frame"><Avatar size={210} animated={false} /></div>
+              <span className="float-chip chip-a">React Native ✦</span>
+              <span className="float-chip chip-b">iOS · Android</span>
+              <span className="float-chip chip-c">Mobile-first</span>
             </div>
             <div className="web-counts" aria-label="Portfolio contents">
               <span><b>{PROJECTS.length}</b> projects</span>
