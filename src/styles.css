@@ -250,6 +250,32 @@ footer{border-top:1px solid rgba(148,163,184,.14);padding:36px 5vw;text-align:ce
 @keyframes wave{0%,55%,100%{transform:rotate(0deg)}6%{transform:rotate(-24deg)}14%{transform:rotate(18deg)}22%{transform:rotate(-18deg)}30%{transform:rotate(14deg)}38%{transform:rotate(-6deg)}46%{transform:rotate(0deg)}}
 @keyframes hiPop{0%,58%,100%{opacity:0;transform:scale(.7) translateY(4px)}7%{opacity:1;transform:scale(1) translateY(0)}45%{opacity:1;transform:scale(1) translateY(0)}55%{opacity:0;transform:scale(.7) translateY(4px)}}
 .lock-swipe{font-size:.78rem;color:#cbd5e1;margin-top:14px}
+.lock-greet{margin:10px 0 0;color:#fff;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:6px 14px;font-size:.85rem}
+.lock-orbs{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.lock-orbs i{position:absolute;border-radius:50%;filter:blur(2px)}
+.lock-orbs i:nth-child(1){width:180px;height:180px;left:-50px;top:90px;background:rgba(125,211,252,.30)}
+.lock-orbs i:nth-child(2){width:140px;height:140px;right:-40px;bottom:160px;background:rgba(45,212,191,.22)}
+.battery-pct{font-size:.68rem;font-weight:700}
+.mini-widgets{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.mini-widget{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:11px 12px;color:#fff;text-align:left;display:flex;flex-direction:column;backdrop-filter:blur(10px)}
+.mini-widget small{color:#dbeafe;text-transform:uppercase;letter-spacing:.08em;font-size:.62rem}
+.mini-widget b{font-size:.92rem}
+.mini-widget span{font-size:.68rem;color:#cbd5e1}
+.home-search{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.20);border-radius:999px;padding:8px 14px;margin-top:14px;color:#fff}
+.home-search input{background:none;border:0;outline:0;color:#fff;width:100%;font-size:.86rem}
+.home-search input::placeholder{color:rgba(255,255,255,.65)}
+.home-search button{background:none;border:0;color:#fff;min-height:0;padding:0}
+.home-dots{display:flex;justify-content:center;gap:6px;margin:14px 0 0}
+.home-dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35)}
+.home-dots i.on{background:#fff}
+.switcher-card{display:flex;align-items:center;gap:12px;text-align:left}
+.switcher-icon{display:grid;place-items:center;width:44px;height:44px;border-radius:13px;color:#fff;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.switcher-icon svg{width:20px;height:20px}
+.switcher-card span span{display:block}
+.camera-frame{position:relative;overflow:hidden}
+.camera-frame::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,.25) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.25) 1px,transparent 1px);background-size:33.3% 33.3%}
+.app-screen{box-shadow:0 -14px 34px rgba(0,0,0,.32)}
+.app-header{box-shadow:0 2px 10px rgba(15,23,42,.06)}
 .app-screen-detail{animation:appSlide .34s cubic-bezier(.22,1,.36,1)}
 .android-nav{position:absolute;bottom:4px;left:0;right:0;z-index:6;display:flex;justify-content:space-around;align-items:center;padding:6px 40px}
 .android-nav button{background:none;border:0;color:rgba(255,255,255,.85);min-height:32px;font-size:1rem}

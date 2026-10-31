@@ -38,6 +38,7 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
   const [flashlight, setFlashlight] = useState(false)
   const [battery, setBattery] = useState(87)
   const [cameraFlash, setCameraFlash] = useState(false)
+  const [query, setQuery] = useState('')
   const timer = useRef(null)
   const swipeStart = useRef(null)
   const { time, date } = now
@@ -127,6 +128,10 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
 
   const project = PROJECTS.find((p) => p.id === projectId)
   const appLabel = (id) => (id === 'detail' ? (project ? project.name : 'Project') : TITLES[id] || id)
+  const appById = (id) => APPS.find((a) => a.id === id)
+  const hour = new Date().getHours()
+  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening'
+  const filteredApps = query.trim() ? APPS.filter((a) => a.label.toLowerCase().includes(query.trim().toLowerCase())) : null
 
   function shutter() {
     buzz()
@@ -152,6 +157,7 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
             {dnd && <span>☾</span>}
             {!wifi && <span>No Wi-Fi</span>}
             <span>5G</span><i className="sig" /><i className="sig" /><i className="sig" />
+            <span className="battery-pct">{battery}%</span>
             <span className="battery"><i style={{ width: `${battery}%` }} /></span>
           </span>
         </div>
@@ -162,8 +168,10 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
             {...track}
             onPointerUp={(e) => swipeUp(e, unlock)}
           >
+            <div className="lock-orbs" aria-hidden="true"><i /><i /></div>
             <p className="lock-date">{date}</p>
             <p className="lock-time">{time}</p>
+            <p className="lock-greet">{greeting} 👋</p>
             <p className="lock-hint">Suyash Tripathi</p>
             <p className="lock-sub">React Native Developer</p>
             <div className="lock-note">
@@ -181,26 +189,52 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
         ) : screen === 'home' ? (
           <div className="home-screen">
             <div className="widget" onClick={() => openApp('about')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && openApp('about')}>
-              <div><small>{date}</small><b>Hello, I build mobile apps.</b><span className="widget-sub">React Native · iOS · Android</span></div>
+              <div><small>{date} · {greeting}</small><b>Hello, I build mobile apps.</b><span className="widget-sub">React Native · iOS · Android</span></div>
               <span className="widget-mark"><Avatar size={44} animated={false} /></span>
             </div>
-            <div className="app-grid">
-              {APPS.slice(0, 4).map((a) => (
-                <button key={a.id} className="app-btn" onClick={() => openApp(a.id)} aria-label={`Open ${a.label}`}>
-                  <span className="app-icon" style={{ background: a.tint }}><AppIcon id={a.icon} /></span>
-                  <span className="app-label">{a.label}</span>
-                </button>
-              ))}
+            <div className="mini-widgets">
+              <div className="mini-widget"><small>Clock</small><b>{time}</b><span>Live time</span></div>
+              <div className="mini-widget"><small>Projects</small><b>{PROJECTS.length} apps</b><span>Inside the phone</span></div>
             </div>
+            <label className="home-search" aria-label="Search apps">
+              <span>⌕</span>
+              <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search apps…" />
+              {query && <button type="button" onClick={() => setQuery('')} aria-label="Clear search">✕</button>}
+            </label>
+            {filteredApps ? (
+              <div className="app-grid">
+                {filteredApps.map((a) => (
+                  <button key={a.id} className="app-btn" onClick={() => openApp(a.id)} aria-label={`Open ${a.label}`}>
+                    <span className="app-icon" style={{ background: `linear-gradient(145deg, ${a.tint}, ${a.tint} 55%, rgba(0,0,0,.35))` }}><AppIcon id={a.icon} /></span>
+                    <span className="app-label">{a.label}</span>
+                  </button>
+                ))}
+                {filteredApps.length === 0 && <p className="small muted">No app matches “{query}”.</p>}
+              </div>
+            ) : (
+              <>
+                <div className="app-grid">
+                  {APPS.slice(0, 4).map((a) => (
+                    <button key={a.id} className="app-btn" onClick={() => openApp(a.id)} aria-label={`Open ${a.label}`}>
+                      <span className="app-icon" style={{ background: `linear-gradient(145deg, ${a.tint}, ${a.tint} 55%, rgba(0,0,0,.35))` }}><AppIcon id={a.icon} /></span>
+                      <span className="app-label">{a.label}</span>
+                    </button>
+                  ))}
+                </div>
+                <p className="home-dots" aria-hidden="true"><i className="on" /><i /><i /></p>
+              </>
+            )}
             <p className="home-foot">Tap an app. GitHub opens in a new tab. <button className="text-btn" onClick={() => setSwitcher(true)}>Recent apps →</button></p>
-            <div className="dock" aria-label="Dock">
-              {APPS.slice(4).map((a) => (
-                <button key={a.id} className="app-btn dock-btn" onClick={() => openApp(a.id)} aria-label={`Open ${a.label}`}>
-                  <span className="app-icon" style={{ background: a.tint }}><AppIcon id={a.icon} /></span>
-                  <span className="app-label">{a.label}</span>
-                </button>
-              ))}
-            </div>
+            {!filteredApps && (
+              <div className="dock" aria-label="Dock">
+                {APPS.slice(4).map((a) => (
+                  <button key={a.id} className="app-btn dock-btn" onClick={() => openApp(a.id)} aria-label={`Open ${a.label}`}>
+                    <span className="app-icon" style={{ background: `linear-gradient(145deg, ${a.tint}, ${a.tint} 55%, rgba(0,0,0,.35))` }}><AppIcon id={a.icon} /></span>
+                    <span className="app-label">{a.label}</span>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         ) : screen === 'camera' ? (
           <div className="app-screen">
@@ -274,12 +308,16 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
           <div className="switcher">
             <div className="shade-head"><b>Recent apps</b><button className="nav-btn" onClick={() => setSwitcher(false)}>Done</button></div>
             <div className="switcher-list">
-              <button className="switcher-card" onClick={goHome}><b>Home</b><span>Home screen</span></button>
-              {recent.map((id) => (
-                <button key={id} className="switcher-card" onClick={() => { setSwitcher(false); setScreen(id) }}>
-                  <b>{appLabel(id)}</b><span>Tap to return</span>
-                </button>
-              ))}
+              <button className="switcher-card" onClick={goHome}><span className="switcher-icon" style={{ background: 'linear-gradient(145deg,#2563eb,#06b6d4)' }}>⌂</span><span><b>Home</b><span>Home screen</span></span></button>
+              {recent.map((id) => {
+                const app = appById(id)
+                return (
+                  <button key={id} className="switcher-card" onClick={() => { setSwitcher(false); setScreen(id) }}>
+                    {app && <span className="switcher-icon" style={{ background: `linear-gradient(145deg, ${app.tint}, rgba(0,0,0,.35))` }}><AppIcon id={app.icon} /></span>}
+                    <span><b>{appLabel(id)}</b><span>Tap to return</span></span>
+                  </button>
+                )
+              })}
               {recent.length === 0 && <p className="small muted">No recent apps yet — open one first.</p>}
             </div>
           </div>
