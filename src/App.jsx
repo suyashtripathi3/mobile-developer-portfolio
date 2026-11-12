@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import Phone from './components/Phone.jsx'
 import Avatar from './components/Avatar.jsx'
 import Intro from './components/Intro.jsx'
@@ -15,15 +15,6 @@ const EXPERIENCES = [
   { id: 'ios', icon: '◉', title: 'Experience on iOS', desc: 'Explore my portfolio through an iPhone-inspired interface.' },
   { id: 'android', icon: '◎', title: 'Experience on Android', desc: 'Explore my portfolio through a Pixel-inspired interface.' },
 ]
-
-function tilt(e) {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-  const r = e.currentTarget.getBoundingClientRect()
-  const x = (e.clientX - r.left) / r.width - 0.5
-  const y = (e.clientY - r.top) / r.height - 0.5
-  e.currentTarget.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-3px)`
-}
-function untilt(e) { e.currentTarget.style.transform = '' }
 
 function ExperienceBar({ experience, setExperience }) {
   return (
@@ -51,20 +42,12 @@ export default function App() {
   const [introDone, setIntroDone] = useState(false)
   const [experience, setExperience] = useState(null) // null | 'web' | 'ios' | 'android'
 
-  useEffect(() => {
-    if (!introDone || !experience) return
-    const els = document.querySelectorAll('.reveal')
-    if (!('IntersectionObserver' in window)) { els.forEach((el) => el.classList.add('revealed')); return }
-    const io = new IntersectionObserver((entries) => entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('revealed'); io.unobserve(en.target) } }), { threshold: 0.12 })
-    els.forEach((el) => io.observe(el))
-    return () => io.disconnect()
-  }, [introDone, experience])
-
   if (!introDone) return <Intro onDone={() => setIntroDone(true)} />
 
   if (!experience) {
     return (
-      <main>
+      <main id="main">
+        <a className="skip-link" href="#main">Skip to content</a>
         <header className="topbar">
           <a className="brand" href="#top"><span className="brand-avatar"><Avatar size={38} /></span> Suyash Tripathi</a>
           <nav aria-label="Primary"><a href={PROFILE.github} target="_blank" rel="noreferrer">GitHub ↗</a></nav>
@@ -75,7 +58,7 @@ export default function App() {
           <p className="intro">Explore my world through your preferred interface.</p>
           <div className="choose-grid">
             {EXPERIENCES.map((x) => (
-              <button key={x.id} className="choose-card" onMouseMove={tilt} onMouseLeave={untilt} onClick={() => setExperience(x.id)}>
+              <button key={x.id} className="choose-card" onClick={() => setExperience(x.id)}>
                 <span className="choose-icon">{x.icon}</span>
                 <b>{x.title}</b>
                 <span className="muted small">{x.desc}</span>
@@ -93,7 +76,8 @@ export default function App() {
   // ── WEB: website only, no phone anywhere ──────────────────────────────
   if (experience === 'web') {
     return (
-      <main>
+      <main id="main">
+        <a className="skip-link" href="#main">Skip to content</a>
         <header className="topbar">
           <a className="brand" href="#top"><span className="brand-avatar"><Avatar size={38} /></span> Suyash Tripathi</a>
           <nav aria-label="Primary">
@@ -122,9 +106,6 @@ export default function App() {
             </div>
             <div className="web-hero-photo" aria-hidden="true">
               <div className="web-hero-photo-frame"><Avatar size={210} animated={false} /></div>
-              <span className="float-chip chip-a">React Native ✦</span>
-              <span className="float-chip chip-b">iOS · Android</span>
-              <span className="float-chip chip-c">Mobile-first</span>
             </div>
             <div className="web-counts" aria-label="Portfolio contents">
               <span><b>{PROJECTS.length}</b> projects</span>
@@ -144,7 +125,8 @@ export default function App() {
   // ── iOS / Android: one phone only, everything inside it ───────────────
   const kind = experience // 'ios' | 'android'
   return (
-    <main>
+    <main id="main">
+      <a className="skip-link" href="#main">Skip to content</a>
       <header className="topbar">
         <a className="brand" href="#top"><span className="brand-avatar"><Avatar size={38} /></span> Suyash Tripathi</a>
         <nav aria-label="Primary"><a href={PROFILE.github} target="_blank" rel="noreferrer">GitHub ↗</a></nav>

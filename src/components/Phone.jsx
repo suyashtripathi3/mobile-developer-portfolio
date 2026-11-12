@@ -171,7 +171,7 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
             <div className="lock-orbs" aria-hidden="true"><i /><i /></div>
             <p className="lock-date">{date}</p>
             <p className="lock-time">{time}</p>
-            <p className="lock-greet">{greeting} 👋</p>
+            <p className="lock-greet">{greeting}</p>
             <p className="lock-hint">Suyash Tripathi</p>
             <p className="lock-sub">React Native Developer</p>
             <div className="lock-note">
