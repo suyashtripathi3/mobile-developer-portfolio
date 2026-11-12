@@ -429,3 +429,56 @@ footer{border-top:1px solid rgba(148,163,184,.14);padding:36px 5vw;text-align:ce
 /* Skip link: first Tab stop, visible on focus */
 .skip-link{position:absolute;left:-9999px;top:0;background:#2563eb;color:#fff;padding:12px 18px;border-radius:0 0 12px 0;z-index:300;font-weight:700}
 .skip-link:focus{left:0;outline:2px solid #fff;outline-offset:2px}
+
+/* ── In-app GitHub (phone light screens + web dark section) ── */
+.gh-profile{display:flex;gap:14px;align-items:flex-start;background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:16px;margin-bottom:12px}
+.gh-avatar{border-radius:50%;border:2px solid #fff;box-shadow:0 2px 8px rgba(15,23,42,.15);flex:none}
+.gh-profile h3{margin:0 0 2px}
+.gh-counts{margin:8px 0 0;font-size:.85rem;color:#334155}
+.gh-live{display:flex;align-items:center;gap:8px;font-size:.85rem;color:#475569;margin:0 0 12px}
+.gh-live-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;flex:none;animation:livePulse 2s ease-in-out infinite}
+@keyframes livePulse{0%,100%{opacity:1}50%{opacity:.35}}
+.gh-search{width:100%;padding:12px 14px;border:1px solid #cbd5e1;border-radius:12px;font-size:1rem;background:#fff;margin-bottom:12px}
+.gh-repo-list{display:flex;flex-direction:column;gap:10px}
+.gh-repo{display:flex;flex-direction:column;gap:6px;align-items:flex-start;text-align:left;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:14px;width:100%;cursor:pointer;transition:border-color .2s,transform .2s}
+.gh-repo:hover{border-color:#2563eb;transform:translateY(-1px)}
+.gh-repo-name{font-weight:700;color:#0f172a;font-size:1rem}
+.gh-repo-desc{font-size:.88rem;color:#475569;line-height:1.45}
+.gh-repo-meta{display:flex;flex-wrap:wrap;gap:10px;font-size:.8rem;color:#64748b}
+.gh-lang-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#2563eb;margin-right:4px}
+.gh-detail-name{margin:4px 0 8px}
+.gh-stats{display:flex;flex-wrap:wrap;gap:12px;font-size:.88rem;color:#334155;margin:12px 0}
+.gh-readme-title{margin:18px 0 8px}
+.gh-readme{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:14px;font-size:.82rem;line-height:1.55;white-space:pre-wrap;word-break:break-word;max-height:320px;overflow-y:auto;margin:0 0 16px}
+.gh-error{text-align:center;padding:24px 8px;display:flex;flex-direction:column;gap:10px;align-items:center}
+.gh-skeleton{display:flex;flex-direction:column;gap:12px;padding:8px 0}
+.sk{height:14px;border-radius:7px;background:linear-gradient(90deg,#e2e8f0 25%,#f1f5f9 50%,#e2e8f0 75%);background-size:200% 100%;animation:skShimmer 1.2s infinite}
+.sk.wide{height:56px;border-radius:12px}
+@keyframes skShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+/* Web (dark) variants */
+.web-gh-profile{display:flex;gap:16px;align-items:center;margin-bottom:14px}
+.web-gh-profile .gh-counts{color:#cbd5e1}
+.web-gh-profile .btn{margin-left:auto;flex:none}
+.web-gh-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.web-gh-list .gh-repo{background:#0d1524;border-color:#22314a}
+.web-gh-list .gh-repo:hover{border-color:#38bdf8}
+.web-gh-list .gh-repo-name{color:#fff}
+.web-gh-list .gh-repo-desc{color:#94a3b8}
+.web-gh-list .gh-repo-meta{color:#7d8aa0}
+.web-section .gh-live{color:#94a3b8}
+.web-section .gh-skeleton .sk{background:linear-gradient(90deg,#1e293b 25%,#334155 50%,#1e293b 75%);background-size:200% 100%}
+.web-section .gh-error .muted{color:#94a3b8}
+@media(max-width:640px){.web-gh-list{grid-template-columns:1fr}.web-gh-profile{flex-wrap:wrap}.web-gh-profile .btn{margin-left:0}}
+
+/* ── LinkedIn badge + fallback card ── */
+.li-badge-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;padding:8px 0}
+.li-badge-wrap .LI-profile-badge{min-height:300px}
+.li-note{text-align:center}
+.li-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+.li-card h3{margin:8px 0 0}
+.li-card p{margin:0}
+.li-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:10px}
+.web-li{margin-top:20px;display:flex;justify-content:center}
+.web-li .li-card{background:#0d1524;border-color:#22314a;color:#eef2f8}
+.web-li .li-card .muted{color:#94a3b8}
+.li-screen .btn{margin-top:16px}

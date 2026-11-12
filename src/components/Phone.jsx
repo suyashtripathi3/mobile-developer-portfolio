@@ -8,7 +8,8 @@ import ExperienceScreen from '../screens/ExperienceScreen.jsx'
 import SkillsScreen from '../screens/SkillsScreen.jsx'
 import ResumeScreen from '../screens/ResumeScreen.jsx'
 import ContactScreen from '../screens/ContactScreen.jsx'
-import { CONFIG } from '../data/portfolio.js'
+import GitHubScreen from '../screens/GitHubScreen.jsx'
+import LinkedInScreen from '../screens/LinkedInScreen.jsx'
 
 function nowParts() {
   const d = new Date()
@@ -18,7 +19,7 @@ function nowParts() {
   }
 }
 
-const TITLES = { about: 'About Me', projects: 'My Projects', detail: 'Project', experience: 'Experience', skills: 'Technical Skills', resume: 'Resume', contact: 'Contact Me', camera: 'Camera' }
+const TITLES = { about: 'About Me', projects: 'My Projects', detail: 'Project', experience: 'Experience', skills: 'Technical Skills', resume: 'Resume', contact: 'Contact Me', camera: 'Camera', github: 'GitHub', linkedin: 'LinkedIn' }
 
 export default function Phone({ kind, featured, exploreRequest, onExploreHandled }) {
   const [locked, setLocked] = useState(true)
@@ -64,11 +65,7 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
 
   function openApp(id) {
     buzz()
-    if (id === 'github') { window.open(PROFILE.github, '_blank', 'noopener'); return }
-    if (id === 'linkedin') {
-      if (!CONFIG.LINKEDIN_URL) { setLinkedinNotice(true); navigate('contact'); return }
-      window.open(CONFIG.LINKEDIN_URL, '_blank', 'noopener'); return
-    }
+    // GitHub and LinkedIn now open as real screens inside the phone.
     navigate(id)
   }
 
@@ -114,11 +111,7 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
     if (exploreRequest.app === 'project-detail' && exploreRequest.projectId) {
       setProjectId(exploreRequest.projectId); setHistory([]); setScreen('detail')
     }
-    else if (exploreRequest.app === 'github') { window.open(PROFILE.github, '_blank', 'noopener') }
-    else if (exploreRequest.app === 'linkedin') {
-      if (!CONFIG.LINKEDIN_URL) { setLinkedinNotice(true); setHistory([]); setScreen('contact') }
-      else { window.open(CONFIG.LINKEDIN_URL, '_blank', 'noopener') }
-    }
+    else if (exploreRequest.app === 'github' || exploreRequest.app === 'linkedin') { setHistory([]); setScreen(exploreRequest.app) }
     else { setHistory([]); setScreen(exploreRequest.app) }
     if (onExploreHandled) onExploreHandled()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -264,6 +257,8 @@ export default function Phone({ kind, featured, exploreRequest, onExploreHandled
               {screen === 'skills' && <SkillsScreen />}
               {screen === 'resume' && <ResumeScreen />}
               {screen === 'contact' && <ContactScreen linkedinNotice={linkedinNotice} />}
+              {screen === 'github' && <GitHubScreen />}
+              {screen === 'linkedin' && <LinkedInScreen />}
             </div>
           </div>
         )}

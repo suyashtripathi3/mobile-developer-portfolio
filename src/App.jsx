@@ -81,7 +81,7 @@ export default function App() {
         <header className="topbar">
           <a className="brand" href="#top"><span className="brand-avatar"><Avatar size={38} /></span> Suyash Tripathi</a>
           <nav aria-label="Primary">
-            <a href="#web-about">About</a><a href="#web-projects">Projects</a><a href="#web-experience">Experience</a><a href="#web-skills">Skills</a><a href="#web-resume">Resume</a><a href="#web-contact">Contact</a>
+            <a href="#web-about">About</a><a href="#web-projects">Projects</a><a href="#web-github">GitHub</a><a href="#web-experience">Experience</a><a href="#web-skills">Skills</a><a href="#web-resume">Resume</a><a href="#web-contact">Contact</a>
             <a href={PROFILE.github} target="_blank" rel="noreferrer">GitHub ↗</a>
           </nav>
         </header>

@@ -4,9 +4,37 @@ import Avatar from './Avatar.jsx'
 import Preview from './Preview.jsx'
 import ContactScreen from '../screens/ContactScreen.jsx'
 import { downloadResume, downloadResumePdf } from '../screens/ResumeScreen.jsx'
+import { GitHubError, GitHubSkeleton, RepoRow, useGitHubData } from './GitHubView.jsx'
+import LinkedInBadge from './LinkedInBadge.jsx'
 
 // Full-page Web experience, built from the SAME shared data as the phones.
 // No second copy of any project, skill or experience lives here.
+function WebGitHub() {
+  const { profile, repos, error, loading, retry } = useGitHubData()
+  if (loading) return <GitHubSkeleton />
+  if (error) return <GitHubError error={error} retry={retry} />
+  const top = (repos || []).slice(0, 6)
+  return (
+    <>
+      {profile && (
+        <div className="web-card web-gh-profile">
+          <img className="gh-avatar" src={profile.avatar_url} alt="" width="64" height="64" />
+          <div>
+            <h3>{profile.name || profile.login} <span className="muted">@{profile.login}</span></h3>
+            {profile.bio && <p className="muted">{profile.bio}</p>}
+            <p className="gh-counts"><b>{profile.public_repos}</b> public repos · <b>{profile.followers}</b> followers · <b>{profile.following}</b> following</p>
+          </div>
+          <a className="btn secondary" href={profile.html_url} target="_blank" rel="noreferrer">View on GitHub ↗</a>
+        </div>
+      )}
+      <p className="gh-live"><span className="gh-live-dot" /> Live from GitHub — most recently updated first</p>
+      <div className="web-gh-list">
+        {top.map((r) => <RepoRow key={r.id} repo={r} onOpen={() => window.open(r.html_url, '_blank', 'noopener')} />)}
+      </div>
+    </>
+  )
+}
+
 export default function WebSections() {
   const [selected, setSelected] = useState(null)
 
@@ -45,6 +73,13 @@ export default function WebSections() {
             </button>
           ))}
         </div>
+      </section>
+
+      <section className="web-section" id="web-github">
+        <p className="section-label">GitHub</p>
+        <h2>Live from GitHub</h2>
+        <p className="muted">My public repositories, read live from GitHub — the same data the GitHub app shows inside the phone.</p>
+        <WebGitHub />
       </section>
 
       <section className="web-section" id="web-experience">
@@ -89,6 +124,7 @@ export default function WebSections() {
         <p className="section-label">Contact</p>
         <h2>Contact</h2>
         <div className="web-card web-contact-card"><ContactScreen /></div>
+        <div className="web-li"><LinkedInBadge theme="dark" /></div>
       </section>
 
       {selected && (
